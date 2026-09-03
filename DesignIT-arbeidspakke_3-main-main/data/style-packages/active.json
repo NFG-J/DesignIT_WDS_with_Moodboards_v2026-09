@@ -1,0 +1,7 @@
+{
+  "projectId": "designit-local-demo",
+  "activeVersion": "classic",
+  "catalogUrl": "./data/style-packages/classic/components/html_components.json",
+  "manifestUrl": "./data/style-packages/classic/manifest.json",
+  "tokensUrl": "./data/style-packages/classic/tokens.json"
+}

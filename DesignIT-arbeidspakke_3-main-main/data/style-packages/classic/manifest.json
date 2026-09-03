@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "classic",
+  "version": "classic",
+  "name": "Classic DesignIT",
+  "projectId": "designit-local-demo",
+  "sourceBoardRevision": 0,
+  "sourceProposalId": "classic",
+  "sourceProposalVersion": 1,
+  "createdAt": "2026-09-02T00:00:00.000Z",
+  "generator": {
+    "type": "legacy-import",
+    "model": "none",
+    "notes": "Read-only baseline package seeded from the supplied HTML catalogue."
+  },
+  "components": {
+    "html": "./components/html_components.json",
+    "javascript": "../../js_components.json",
+    "api": "../../api_components.json"
+  },
+  "assets": [
+    {
+      "path": "../../../img/design_it_logo.png",
+      "mimeType": "image/png",
+      "provenance": "application asset"
+    }
+  ],
+  "hashes": {},
+  "licenses": [
+    {
+      "name": "DesignIT application assets",
+      "status": "project-owned-or-provided"
+    },
+    {
+      "name": "MDN reference links",
+      "status": "external documentation references"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "checkedAt": "2026-09-02T00:00:00.000Z",
+    "messages": []
+  }
+}

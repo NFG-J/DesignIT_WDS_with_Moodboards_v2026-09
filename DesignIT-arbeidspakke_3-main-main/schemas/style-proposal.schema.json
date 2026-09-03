@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://designit.local/schemas/style-proposal.schema.json",
+  "title": "DesignIT Style Proposal",
+  "type": "object",
+  "required": ["schemaVersion", "id", "version", "boardId", "boardRevision", "createdAt", "directions"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^proposal_" },
+    "version": { "type": "integer", "minimum": 1 },
+    "boardId": { "type": "string", "pattern": "^mb_" },
+    "boardRevision": { "type": "integer", "minimum": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "directions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "summary", "evidence", "brandAttributes", "tokens", "rules", "accessibility", "confidence"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^direction_" },
+          "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "summary": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["itemId", "label", "observation"],
+              "properties": {
+                "itemId": { "type": "string" },
+                "label": { "type": "string" },
+                "observation": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "brandAttributes": { "type": "array", "items": { "type": "string" } },
+          "tokens": { "$ref": "style-tokens.schema.json#/properties/tokens" },
+          "rules": {
+            "type": "object",
+            "required": ["layout", "imagery", "components"],
+            "properties": {
+              "layout": { "type": "string" },
+              "imagery": { "type": "string" },
+              "components": { "type": "string" },
+              "motion": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "accessibility": {
+            "type": "object",
+            "required": ["target", "observations", "risks"],
+            "properties": {
+              "target": { "type": "string" },
+              "observations": { "type": "array", "items": { "type": "string" } },
+              "risks": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          },
+          "confidence": {
+            "type": "object",
+            "required": ["level", "notes"],
+            "properties": {
+              "level": { "enum": ["low", "medium", "high"] },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

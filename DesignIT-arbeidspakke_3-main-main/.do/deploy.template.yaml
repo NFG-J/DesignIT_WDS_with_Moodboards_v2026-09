@@ -1,0 +1,10 @@
+spec:
+  name: designit-web-design-studio
+  static_sites:
+    - name: web-design-studio
+      git:
+        repo_clone_url: https://github.com/NFG-J/DesignIT-arbeidspakke_3-main.git
+        branch: main
+      source_dir: /
+      environment_slug: html
+      index_document: index.html

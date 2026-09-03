@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="DesignIT web design studio; for creating and exporting HTML components with drag and drop functionality">
+    <meta name="keywords" content="web design, HTML, CSS, components, drag and drop, studio">
+    <title>DesignIT - Web Design Studio</title>
+    <link rel="stylesheet" href="./css/studio_style.css">
+    <link rel="icon" href="./img/design_it_logo.png" type="image/png">
+    <link rel="preload" href="./data/html_components.json" as="fetch" type="application/json" crossorigin>
+    <link rel="preload" href="./data/js_components.json" as="fetch" type="application/json" crossorigin>
+    <link rel="preload" href="./data/api_components.json" as="fetch" type="application/json" crossorigin>
+</head>
+
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">Skip to main content</a>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar" role="banner">
+        <div class="nav-brand">
+            <img src="./img/design_it_logo.png" alt="DesignIT Logo" class="nav-logo">
+            <span class="brand-text">
+                <span class="brand-name">DesignIT</span><span class="brand-subtitle"> - Web Design Studio</span>
+            </span>
+        </div>
+        <nav class="nav-links" role="navigation" aria-label="Main navigation">
+            <div class="active-style-pill" id="active-style-indicator" aria-live="polite">
+                Classic DesignIT (classic)
+            </div>
+            <button id="moodboard-open" type="button" aria-label="Open mood board and Style Agent">
+                <span aria-hidden="true">◫</span> Mood board
+            </button>
+            <button id="undo" type="button" aria-label="Undo last action" disabled>
+                <span aria-hidden="true">↶</span> Undo
+            </button>
+            <button id="redo" type="button" aria-label="Redo last action" disabled>
+                <span aria-hidden="true">↷</span> Redo
+            </button>
+            <button id="clear" type="button" aria-label="Clear canvas">
+                <span aria-hidden="true">🗑️</span> Clear
+            </button>
+            <button id="export" type="button" aria-label="Export design" title="Export HTML and CSS files as ZIP">
+                <span aria-hidden="true">💾</span> Export
+            </button>
+        </nav>
+    </header>
+
+    <main id="main-content" class="container" role="main">
+        <!-- Component Library Panel -->
+        <aside class="menu" role="complementary" aria-label="Component library">
+            <h2 id="elements-heading">Elements</h2>
+            <div class="elements-container" role="list" aria-labelledby="elements-heading">
+                <!-- Component categories will be loaded here dynamically -->
+                <div class="category-dropdown" data-category="html">
+                    <button class="dropdown-header" aria-expanded="false" aria-controls="html-elements">
+                        <span class="dropdown-icon">▶</span>
+                        <span class="dropdown-title">HTML Elements</span>
+                    </button>
+                    <div class="dropdown-content" id="html-elements" role="group" aria-labelledby="html-dropdown">
+                        <!-- HTML components will be loaded here -->
+                    </div>
+                </div>
+                <div class="category-dropdown" data-category="javascript">
+                    <button class="dropdown-header" aria-expanded="false" aria-controls="javascript-elements">
+                        <span class="dropdown-icon">▶</span>
+                        <span class="dropdown-title">JavaScript Elements</span>
+                    </button>
+                    <div class="dropdown-content" id="javascript-elements" role="group"
+                        aria-labelledby="javascript-dropdown">
+                        <!-- JavaScript components will be loaded here -->
+                    </div>
+                </div>
+                <div class="category-dropdown" data-category="webapis">
+                    <button class="dropdown-header" aria-expanded="false" aria-controls="webapis-elements">
+                        <span class="dropdown-icon">▶</span>
+                        <span class="dropdown-title">Web APIs</span>
+                    </button>
+                    <div class="dropdown-content" id="webapis-elements" role="group" aria-labelledby="webapis-dropdown">
+                        <!-- Web API components will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Resizer for menu panel -->
+        <div class="resizer" id="resizer1" role="separator" aria-orientation="vertical"
+            aria-label="Resize component library panel" tabindex="0"></div>
+
+        <!-- Canvas Area -->
+        <section class="canvas" id="canvas" role="region" aria-label="Design canvas"
+            aria-describedby="canvas-description">
+            <h2 id="canvas-heading">Canvas</h2>
+            <p id="canvas-description" class="sr-only">
+                Drop components from the library here to build your design. Use keyboard navigation to access dropped
+                components.
+            </p>
+            <!-- Canvas content will be added here -->
+        </section>
+
+        <!-- Resizer for side panel -->
+        <div class="resizer" id="resizer2" role="separator" aria-orientation="vertical" aria-label="Resize code panel"
+            tabindex="0"></div>
+
+        <!-- Code and References Panel -->
+        <aside class="side-panel" role="complementary" aria-label="Code and references">
+            <div class="tab-container" role="tablist" aria-label="Code view tabs">
+                <button class="copy-btn" id="copyBtn" type="button" title="Copy content"
+                    aria-label="Copy current tab content">
+                    <span aria-hidden="true">📋</span>
+                    <span class="sr-only">Copy</span>
+                </button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab1" id="tab-button-1">
+                    HTML
+                </button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab2" id="tab-button-2">
+                    CSS
+                </button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab3" id="tab-button-3">
+                    JS
+                </button>
+                <button class="tab" role="tab" aria-selected="false" aria-controls="tab4" id="tab-button-4">
+                    References
+                </button>
+            </div>
+
+            <div id="tab1" class="tab-content" role="tabpanel" aria-labelledby="tab-button-1" aria-label="HTML code">
+                <h3 class="sr-only">HTML Code</h3>
+                <pre aria-live="polite" aria-atomic="false"></pre>
+            </div>
+
+            <div id="tab2" class="tab-content" role="tabpanel" aria-labelledby="tab-button-2" aria-label="CSS code">
+                <h3 class="sr-only">CSS Code</h3>
+                <pre aria-live="polite" aria-atomic="false"></pre>
+            </div>
+
+            <div id="tab3" class="tab-content" role="tabpanel" aria-labelledby="tab-button-3"
+                aria-label="JavaScript/TypeScript code">
+                <h3 class="sr-only">JavaScript/TypeScript Code</h3>
+                <pre aria-live="polite" aria-atomic="false"></pre>
+            </div>
+
+            <div id="tab4" class="tab-content" role="tabpanel" aria-labelledby="tab-button-4"
+                aria-label="Component references">
+                <h3 class="sr-only">Component References</h3>
+                <div aria-live="polite" aria-atomic="false">
+                    <p></p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Application status region for screen readers -->
+    <div id="status-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true">
+    </div>
+
+    <!-- Error boundary for JavaScript errors -->
+    <div id="error-boundary" class="hidden" role="alert" aria-live="assertive">
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="./js/app.js?v=20260903-style-agent"></script>
+
+    <!-- Loading indicator -->
+    <noscript>
+        <div style="padding: 20px; text-align: center; background: #ffeaa7; border: 1px solid #fdcb6e;">
+            <p><strong>JavaScript is required</strong></p>
+            <p>This application requires JavaScript to function properly. Please enable JavaScript in your browser.</p>
+        </div>
+    </noscript>
+</body>
+
+</html>

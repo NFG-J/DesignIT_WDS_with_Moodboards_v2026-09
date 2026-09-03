@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://designit.local/schemas/style-tokens.schema.json",
+  "title": "DesignIT Style Tokens",
+  "type": "object",
+  "required": ["schemaVersion", "packageId", "name", "tokens"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "tokens": {
+      "type": "object",
+      "required": ["color", "font", "space", "radius"],
+      "properties": {
+        "color": {
+          "type": "object",
+          "required": ["brandPrimary", "brandAccent", "surface", "text"],
+          "additionalProperties": {
+            "type": "object",
+            "required": ["value", "role"],
+            "properties": {
+              "value": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+              "role": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "font": {
+          "type": "object",
+          "required": ["heading", "body"],
+          "additionalProperties": {
+            "type": "object",
+            "required": ["value"],
+            "properties": {
+              "value": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "space": { "type": "object", "additionalProperties": { "type": "string" } },
+        "radius": { "type": "object", "additionalProperties": { "type": "string" } },
+        "shadow": { "type": "object", "additionalProperties": { "type": "string" } },
+        "motion": { "type": "object", "additionalProperties": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

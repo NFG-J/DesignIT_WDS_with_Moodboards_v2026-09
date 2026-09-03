@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://designit.local/schemas/component-catalog.schema.json",
+  "title": "DesignIT Component Catalogue v2",
+  "type": "object",
+  "required": ["schemaVersion", "components"],
+  "properties": {
+    "schemaVersion": { "const": "2.0" },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "category", "html", "css", "reference", "assets", "tags", "stylePackageId"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^cmp_" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "category": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "html": { "type": "string", "minLength": 1 },
+          "css": { "type": "string" },
+          "javascript": { "type": "string" },
+          "reference": { "type": "string" },
+          "assets": { "type": "array", "items": { "type": "string" } },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "stylePackageId": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

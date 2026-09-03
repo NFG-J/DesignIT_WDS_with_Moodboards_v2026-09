@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://designit.local/schemas/moodboard.schema.json",
+  "title": "DesignIT Mood Board",
+  "type": "object",
+  "required": ["schemaVersion", "id", "projectId", "revision", "title", "brief", "items", "status"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^mb_" },
+    "projectId": { "type": "string", "minLength": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "ownerSession": { "type": "string" },
+    "status": { "enum": ["draft", "ready", "analysing", "proposed", "accepted", "archived"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "brief": {
+      "type": "object",
+      "required": ["purpose", "audience", "attributes", "avoid", "accessibilityTarget"],
+      "properties": {
+        "purpose": { "type": "string", "maxLength": 500 },
+        "audience": { "type": "array", "items": { "type": "string", "maxLength": 80 }, "maxItems": 8 },
+        "attributes": { "type": "array", "items": { "type": "string", "maxLength": 80 }, "maxItems": 12 },
+        "avoid": { "type": "array", "items": { "type": "string", "maxLength": 120 }, "maxItems": 12 },
+        "accessibilityTarget": { "enum": ["WCAG_2_1_AA", "WCAG_2_2_AA", "WCAG_2_2_AAA"] },
+        "notes": { "type": "string", "maxLength": 2000 }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "source", "label", "sortOrder", "createdAt"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^item_" },
+          "type": { "enum": ["logo", "image", "colour", "font", "layout", "keyword", "note", "avoid"] },
+          "source": { "enum": ["upload", "manual", "generated", "classic-package"] },
+          "assetId": { "type": "string" },
+          "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "value": { "type": "string", "maxLength": 4000 },
+          "notes": { "type": "string", "maxLength": 1000 },
+          "sortOrder": { "type": "integer", "minimum": 0 },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "metadata": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
